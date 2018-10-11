@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Question1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <Label Content="人体感应" HorizontalAlignment="Left" Margin="52,67,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblHum" Content="无人" HorizontalAlignment="Left" Margin="130,67,0,0" VerticalAlignment="Top"/>
+        <Grid HorizontalAlignment="Left" Height="365" Margin="275,24,0,0" VerticalAlignment="Top" Width="476" Background="#FFC9C9C9">
+            <Image x:Name="imgCamera" HorizontalAlignment="Left" Height="365" VerticalAlignment="Top" Width="476"/>
+        </Grid>
+        <Button x:Name="btnU" Content="上" HorizontalAlignment="Left" Margin="110,130,0,0" VerticalAlignment="Top" Width="54" GotMouseCapture="btnU_MouseDown" LostMouseCapture="btnU_MouseUp"/>
+        <Button x:Name="btnD" Content="下" HorizontalAlignment="Left" Margin="110,259,0,0" VerticalAlignment="Top" Width="54" GotMouseCapture="btnD_MouseDown" LostMouseCapture="btnD_MouseUp"/>
+        <Button x:Name="btnL" Content="左" HorizontalAlignment="Left" Margin="31,196,0,0" VerticalAlignment="Top" Width="54" GotMouseCapture="btnL_MouseDown" LostMouseCapture="btnL_MouseUp"/>
+        <Button x:Name="btnR" Content="右" HorizontalAlignment="Left" Margin="189,196,0,0" VerticalAlignment="Top" Width="54" GotMouseCapture="btnR_MouseDown" LostMouseCapture="btnR_MouseUp"/>
+        <Button x:Name="btnSave" Content="拍照" HorizontalAlignment="Left" Margin="104,336,0,0" VerticalAlignment="Top" Width="64" Height="18" Click="btnSave_Click"/>
+
     </Grid>
 </Window>
