@@ -87,7 +87,7 @@ namespace Question1
             var bitmapEncoder = new JpegBitmapEncoder();
             bitmapEncoder.Frames.Add(BitmapFrame.Create((BitmapImage)imgCamera.Source));
 
-            using (FileStream fileStream = new FileStream(@"Image\" + DateTime.Now.ToString("yyyyMMdd-hhmmss") + ".jpg", FileMode.CreateNew))
+            using (FileStream fileStream = new FileStream(@"Image\人员截图" + DateTime.Now.ToString("hhmmss") + ".jpg", FileMode.CreateNew))
             {
                 bitmapEncoder.Save(fileStream);
             }

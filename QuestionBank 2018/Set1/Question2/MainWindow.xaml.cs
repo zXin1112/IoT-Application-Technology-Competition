@@ -59,9 +59,12 @@ namespace Question2
 
             zigBee.GetSet();
 
-            lblTemp.Content = zigBee.lightValue;
-            lblHum.Content = zigBee.temperatureValue;
-            lblLig.Content = zigBee.lightValue;
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                lblTemp.Content = zigBee.lightValue;
+                lblHum.Content = zigBee.temperatureValue;
+                lblLig.Content = zigBee.lightValue;
+            }));
 
             double lightNum, limitNum;
 
@@ -82,8 +85,11 @@ namespace Question2
         {
             adam.SetData();
 
-            lblFla.Content = adam.DI1 ? "检测到火焰" : "未检测到火焰";
-            lblSmo.Content = adam.DI2 ? "检测到烟雾" : "未检测到烟雾";
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                lblFla.Content = adam.DI1 ? "检测到火焰" : "未检测到火焰";
+                lblSmo.Content = adam.DI2 ? "检测到烟雾" : "未检测到烟雾";
+            }));
 
             if (adam.DI1 == OnFire)
                 return;
