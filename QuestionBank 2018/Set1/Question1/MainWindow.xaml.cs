@@ -32,15 +32,12 @@ namespace Question1
         {
             InitializeComponent();
 
-            thread = new Thread(MonitorSensor);
+            thread = new Thread(new ThreadStart(MonitorSensor));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //ipCameraHelper1 = new IpCameraHelper("192.168.3.10:81", "admin", "", new Action<ImageEventArgs>(ShowImage));
-            //ipCameraHelper1.StartProcessing();
-
-            adam = new ADAM4150(new ComSettingModel() { DigitalQuantityCom = "COM14" });
+            adam = new ADAM4150(new ComSettingModel() { DigitalQuantityCom = "COM5" });
 
             thread.Start();
 
@@ -52,29 +49,27 @@ namespace Question1
 
         public void MonitorSensor()
         {
-            while (true)
+            //adam.SetData();
+
+            if (!adam.DI0)
             {
-                adam.SetData();
-
-                if (!adam.DI0)
+                if (ipCameraHelper == null)
                 {
-                    if (ipCameraHelper == null)
+                    this.Dispatcher.Invoke(new Action(() =>
                     {
-                        this.Dispatcher.Invoke(new Action(() =>
-                        {
-                            ipCameraHelper = new IpCameraHelper("192.168.3.10:81", "admin", "", new Action<ImageEventArgs>(ShowImage));
-
-                        }));
-                    }
-
-                    ipCameraHelper.StartProcessing();
+                        ipCameraHelper = new IpCameraHelper("172.16.1.13:81", "admin", "", new Action<ImageEventArgs>(ShowImage));
+                    }));
                 }
-                else
-                {
-                    if (ipCameraHelper != null)
-                        ipCameraHelper.StopProcessing();
-                }
+
+                ipCameraHelper.StartProcessing();
             }
+            else
+            {
+                if (ipCameraHelper != null)
+                    ipCameraHelper.StopProcessing();
+            }
+
+            MonitorSensor();
         }
 
         public void ShowImage(ImageEventArgs imageEventArgs)
