@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Question3"
         mc:Ignorable="d"
-        Title="生产作业的环境监控" Height="450" Width="800">
+        Title="生产作业的环境监控" Height="450" Width="717.139" Loaded="Window_Loaded">
     <Grid>
-        
+        <Label Content="风速：" HorizontalAlignment="Left" Margin="64,36,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblWind" Content="null" HorizontalAlignment="Left" Margin="121,36,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="大气压力：" HorizontalAlignment="Left" Margin="317,36,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblAtm" Content="null" HorizontalAlignment="Left" Margin="402,36,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="设置风速阈值：" HorizontalAlignment="Left" Margin="64,96,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="m/s" HorizontalAlignment="Left" Margin="275,96,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="txbThr" HorizontalAlignment="Left" Height="23" Margin="177,100,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="73" FontSize="14"/>
+
     </Grid>
 </Window>

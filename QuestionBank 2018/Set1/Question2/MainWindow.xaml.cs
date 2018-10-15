@@ -26,6 +26,7 @@ namespace Question2
     {
         Timer timer;
 
+        ZigBee zigBee;
         ADAM4150 adam;
 
         bool OnFire;
@@ -39,7 +40,8 @@ namespace Question2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            adam = new ADAM4150(new DigitalLibrary.ComSettingModel() { DigitalQuantityCom = "COM14" });
+            zigBee = new ZigBee(new ZigBeeLibrary.ComSettingModel() { ZigbeeCom = "COM4" });
+            adam = new ADAM4150(new DigitalLibrary.ComSettingModel() { DigitalQuantityCom = "COM5" });
 
             timer.Elapsed += Timer_Elapsed;
             timer.AutoReset = true;
@@ -49,14 +51,12 @@ namespace Question2
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            MonitorADAM();
             MonitorZigBee();
+            MonitorADAM();
         }
 
-        private void MonitorADAM()
+        private void MonitorZigBee()
         {
-            ZigBee zigBee = new ZigBee(new ZigBeeLibrary.ComSettingModel() { ZigbeeCom = "COM13" });
-
             zigBee.GetSet();
 
             this.Dispatcher.Invoke(new Action(() =>
@@ -81,7 +81,7 @@ namespace Question2
             }
         }
 
-        private void MonitorZigBee()
+        private void MonitorADAM()
         {
             adam.SetData();
 
@@ -96,7 +96,7 @@ namespace Question2
 
             OnFire = adam.DI1;
 
-            LEDPlayer ledPlayer = new LEDPlayer("COM11");
+            LEDPlayer ledPlayer = new LEDPlayer("COM2");
 
             if (adam.DI1)
             {
