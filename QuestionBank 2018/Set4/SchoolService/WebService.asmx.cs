@@ -18,6 +18,7 @@ namespace SchoolService
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
+        string connectionStr = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
 
         [WebMethod]
         public string HelloWorld()
@@ -26,10 +27,8 @@ namespace SchoolService
         }
 
         [WebMethod]
-        public List<BookInfo> QueryBookInfo(string bookName = "")
+        public List<BookInfo> GetBookInfos(string bookName = "")
         {
-            string connectionStr = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
-
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
                 string sqlCommand = "select * from T_BookInfo where BookName like '%@name%'";
@@ -55,7 +54,56 @@ namespace SchoolService
                     return infos;
                 }
             }
+        }
 
+        public List<BorrowBook> GetBorrowBooks(string studentNo)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                string sqlCommand = "select * from T_BorrowBook where StudentNo like '%@StuNo%'";
+
+                using (SqlCommand command = new SqlCommand(sqlCommand, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@StuNo", studentNo));
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<BorrowBook> borrowBooks = new List<BorrowBook>();
+
+                    while (reader.Read())
+                    {
+                        borrowBooks.Add(new BorrowBook()
+                        {
+                            BookNo = reader.GetString(0).Trim(),
+                            StudentNo = reader.GetString(1).Trim(),
+                            AddTime = reader.GetDateTime(2)
+                        });
+                    }
+
+                    return borrowBooks;
+                }
+            }
+        }
+
+        public bool UpdateStatus(string bookNo, string status)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                string sqlCommand = "update T_BorrowBook set Status=@status where BookNo=@bookNo";
+
+                using (SqlCommand command = new SqlCommand(sqlCommand, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@bookNo", bookNo));
+                    command.Parameters.Add(new SqlParameter("@status", status));
+
+                    int result = command.ExecuteNonQuery();
+
+                    if (result == 1)
+                        return true;
+                    else
+                        return false;
+                }
+            }
         }
     }
 }

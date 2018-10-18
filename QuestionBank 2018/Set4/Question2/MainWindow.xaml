@@ -5,12 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Question2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="819">
+        Title="MainWindow" Height="450" Width="819" Loaded="Window_Loaded">
     <Grid>
         <Label Content="借书管理系统" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="btnNewInfo" Content="图书信息录入" HorizontalAlignment="Left" Margin="589,17,0,0" VerticalAlignment="Top" Width="113" Click="btnNewInfo_Click"/>
         <Button x:Name="btnBorrow" Content="借书" HorizontalAlignment="Left" Margin="707,17,0,0" VerticalAlignment="Top" Width="75" Click="btnBorrow_Click"/>
-        <DataGrid HorizontalAlignment="Left" Height="305" Margin="69,60,0,0" VerticalAlignment="Top" Width="653"/>
+        <DataGrid x:Name="dgdBookInfo" HorizontalAlignment="Left" Height="305" Margin="69,60,0,0" VerticalAlignment="Top" Width="653" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="书名" Width="250" Binding="{Binding BookName}"/>
+                <DataGridTextColumn Header="书号" Width="300" Binding="{Binding BookNo}"/>
+                <DataGridTextColumn Header="状态" Width="50" Binding="{Binding Status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

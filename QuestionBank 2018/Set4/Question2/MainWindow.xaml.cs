@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +38,26 @@ namespace Question2
         {
             Borrow borrow = new Borrow();
             borrow.ShowDialog();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string connectionStr = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                string sqlCommand = "select * from T_BookInfo";
+
+                using(SqlDataAdapter adapter=new SqlDataAdapter(sqlCommand, connectionStr))
+                {
+                    DataTable table = new DataTable();
+
+                    adapter.Fill(table);
+
+                    dgdBookInfo.ItemsSource = table.DefaultView;
+                }
+            }
+
         }
     }
 }
