@@ -65,6 +65,8 @@ namespace Question2
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "insert into T_BookInfo values (@name,@no,@status)";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))

@@ -46,6 +46,8 @@ namespace Question2
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "select * from T_BookInfo";
 
                 using(SqlDataAdapter adapter=new SqlDataAdapter(sqlCommand, connectionStr))

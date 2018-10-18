@@ -31,6 +31,8 @@ namespace SchoolService
         {
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "select * from T_BookInfo where BookName like '%@name%'";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))
@@ -60,6 +62,8 @@ namespace SchoolService
         {
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "select * from T_BorrowBook where StudentNo like '%@StuNo%'";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))
@@ -89,6 +93,8 @@ namespace SchoolService
         {
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "update T_BorrowBook set Status=@status where BookNo=@bookNo";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))

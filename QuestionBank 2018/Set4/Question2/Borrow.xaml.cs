@@ -63,6 +63,8 @@ namespace Question2
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "select * from T_BookInfo where BookNo=@no";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))
@@ -117,6 +119,8 @@ namespace Question2
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "insert into T_BorrowBook values (@bookNo,@stuNo,@add)";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))
