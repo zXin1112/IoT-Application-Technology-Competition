@@ -34,6 +34,7 @@ namespace Question3
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             byte[] head = new byte[] { 0xAA, 0xFF, 0xBB, 0x51, 0x54 };
+            byte[] type = new byte[] { 0x01, 0x00, 0x63, 0x00, 0x64 };
             byte[] datas = Encoding.Default.GetBytes(txbText.Text);
 
             byte[] sendData = new byte[datas.Length + 12];
