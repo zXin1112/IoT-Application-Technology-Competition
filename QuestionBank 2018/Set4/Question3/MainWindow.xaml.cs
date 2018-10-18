@@ -34,7 +34,6 @@ namespace Question3
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             byte[] head = new byte[] { 0xAA, 0xFF, 0xBB, 0x51, 0x54 };
-            byte[] type = new byte[] { 0x01, 0x02, 0x64, 0x00, 0x64 };
             byte[] datas = Encoding.Default.GetBytes(txbText.Text);
 
             byte[] sendData = new byte[datas.Length + 12];
@@ -48,7 +47,7 @@ namespace Question3
             using (SerialPort serialPort = new SerialPort(cmbPort.SelectedItem.ToString(), 9600))
             {
                 serialPort.Open();
-                serialPort.Write(datas, 0, datas.Length);
+                serialPort.Write(sendData, 0, sendData.Length);
             }
         }
 
