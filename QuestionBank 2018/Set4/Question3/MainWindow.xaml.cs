@@ -33,17 +33,17 @@ namespace Question3
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
-            byte[] head = new byte[] { 0xAA, 0x01, 0xBB, 0x51, 0x54 };
+            byte[] head = new byte[] { 0xAA, 0xFF, 0xBB, 0x51, 0x54 };
             byte[] type = new byte[] { 1, 2, 100, 0, 100 };
             byte[] datas = Encoding.Default.GetBytes(txbText.Text);
 
             byte[] sendData = new byte[datas.Length + 12];
 
             head.CopyTo(sendData, 0);
-            head[5] = NewMethod(datas);
+            sendData[5] = NewMethod(type, datas);
             type.CopyTo(sendData, 6);
-            datas.CopyTo(sendData, datas.Length + 6);
-            datas[datas.Length - 1] = 0xFF;
+            datas.CopyTo(sendData, 11);
+            sendData[sendData.Length - 1] = 0xFF;
 
             using (SerialPort serialPort = new SerialPort(cmbPort.SelectedItem.ToString(), 9600))
             {
@@ -52,9 +52,13 @@ namespace Question3
             }
         }
 
-        private static byte NewMethod(byte[] datas)
+        private static byte NewMethod(byte[] types, byte[] datas)
         {
             int result = 0;
+
+            foreach (byte type in types)
+                result += type;
+
             foreach (byte data in datas)
                 result += data;
 
