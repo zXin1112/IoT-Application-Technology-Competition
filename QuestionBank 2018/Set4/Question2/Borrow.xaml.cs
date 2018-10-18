@@ -84,7 +84,7 @@ namespace Question2
             MifareRFEYE.Instance.ConnDevice();
             MifareRFEYE.Instance.Search();
 
-            txbStuNo.Text = MifareRFEYE.Instance.ReadString();
+            txbCardNo.Text = MifareRFEYE.Instance.ReadString(CardDataKind.CardID, 0, Encoding.UTF8);
 
             MifareRFEYE.Instance.CloseDevice();
 
@@ -92,6 +92,8 @@ namespace Question2
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
+                connection.Open();
+
                 string sqlCommand = "select * from T_UserInfo where CardNo=@no";
 
                 using (SqlCommand command = new SqlCommand(sqlCommand, connection))
@@ -100,7 +102,8 @@ namespace Question2
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    reader.Read();
+                    if (!reader.Read())
+                        return;
 
                     txbStuName.Text = reader.GetString(1).Trim();
                     txbStuNo.Text = reader.GetString(2).Trim();
