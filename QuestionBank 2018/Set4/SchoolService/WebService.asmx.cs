@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Services;
 
@@ -27,7 +29,7 @@ namespace SchoolService
         }
 
         [WebMethod]
-        public List<BookInfo> GetBookInfos(string bookName = "")
+        public string GetBookInfos(string bookName = "")
         {
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
@@ -53,12 +55,13 @@ namespace SchoolService
                         });
                     }
 
-                    return infos;
+                    return Json(typeof(List<BookInfo>), infos);
                 }
             }
         }
 
-        public List<BorrowBook> GetBorrowBooks(string studentNo)
+        [WebMethod]
+        public string GetBorrowBooks(string studentNo)
         {
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
@@ -84,11 +87,12 @@ namespace SchoolService
                         });
                     }
 
-                    return borrowBooks;
+                    return Json(typeof(List<BorrowBook>), borrowBooks);
                 }
             }
         }
 
+        [WebMethod]
         public bool UpdateStatus(string bookNo, string status)
         {
             using (SqlConnection connection = new SqlConnection(connectionStr))
@@ -108,6 +112,20 @@ namespace SchoolService
                         return true;
                     else
                         return false;
+                }
+            }
+        }
+
+        private string Json(Type type, object data)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(type);
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                serializer.WriteObject(stream, data);
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
                 }
             }
         }
