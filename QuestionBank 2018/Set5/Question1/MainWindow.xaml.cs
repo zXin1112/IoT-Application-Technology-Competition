@@ -100,7 +100,7 @@ namespace Question1
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            string filePath = @"D:\videos\" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".mp4"
+            string filePath = @"D:\videos\" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".mp4";
             File.Create(filePath);
 
             if (!videoFileWriter.IsOpen)

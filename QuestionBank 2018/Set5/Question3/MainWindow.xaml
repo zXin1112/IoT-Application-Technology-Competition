@@ -1,0 +1,31 @@
+﻿<Window x:Class="Question3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Question3"
+        mc:Ignorable="d"
+        Title="更新数据客户端" Height="562.181" Width="316.856" Loaded="Window_Loaded">
+    <Grid>
+        <Label Content="服务端IP：" HorizontalAlignment="Right" Margin="0,50,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="服务端端口：" HorizontalAlignment="Right" Margin="0,89,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="ADAM4150串口：" HorizontalAlignment="Right" Margin="0,128,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="ZigBee串口：" HorizontalAlignment="Right" Margin="0,167,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="温度：" HorizontalAlignment="Right" Margin="0,206,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="湿度：" HorizontalAlignment="Right" Margin="0,245,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="烟雾：" HorizontalAlignment="Right" Margin="0,284,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="火焰：" HorizontalAlignment="Right" Margin="0,323,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label Content="连接状态：" HorizontalAlignment="Right" Margin="0,362,156,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblTem" Content="null" HorizontalAlignment="Left" Margin="165,206,0,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblHum" Content="null" HorizontalAlignment="Left" Margin="165,245,0,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblSmoke" Content="null" HorizontalAlignment="Left" Margin="165,284,0,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblFlame" Content="null" HorizontalAlignment="Left" Margin="165,323,0,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblState" Content="未连接" HorizontalAlignment="Left" Margin="165,362,0,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right" Background="Red"/>
+        <Button x:Name="btnSend" Content="开始" HorizontalAlignment="Left" Margin="113,439,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="btnSend_Click"/>
+        <TextBox x:Name="txbIP" HorizontalAlignment="Left" Height="23" Margin="165,54,0,0" TextWrapping="Wrap" Text="192.168.1.2" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <TextBox x:Name="btnPort" HorizontalAlignment="Left" Height="23" Margin="165,93,0,0" TextWrapping="Wrap" Text="9988" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <ComboBox x:Name="cmbADAM" HorizontalAlignment="Left" Margin="165,132,0,0" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <ComboBox x:Name="cmbZigBee" HorizontalAlignment="Left" Margin="165,171,0,0" VerticalAlignment="Top" Width="120" FontSize="14"/>
+
+    </Grid>
+</Window>
