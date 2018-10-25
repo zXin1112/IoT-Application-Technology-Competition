@@ -1,4 +1,5 @@
-﻿using IPCameraDll;
+﻿using AForge.Video.FFMPEG;
+using IPCameraDll;
 using LEDLibrary;
 using System;
 using System.Collections.Generic;
@@ -25,24 +26,54 @@ namespace Question1
     /// </summary>
     public partial class MainWindow : Window
     {
-        string ledCom, ledText, cameraIp, recordLength;
+        string ledCom, ledText, cameraIp;
+        int recordLength;
 
         Thread thread;
+        System.Timers.Timer timer = new System.Timers.Timer();
 
         IpCameraHelper ipCameraHelper;
+        VideoFileWriter videoFileWriter;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            videoFileWriter = new VideoFileWriter();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!Directory.Exists("D:\videos"))
+                Directory.CreateDirectory("D:\videos");
+
+            if (!File.Exists("Config.xml"))
+                return;
+
+            XmlDocument document = new XmlDocument();
+            document.Load("Config.xml");
+
+            XmlNode eleLED = document.SelectSingleNode("/root/LED");
+            ledCom = eleLED.Attributes["Com"].Value;
+            ledText = eleLED.Attributes["Text"].Value;
+
+            XmlNode eleCamera = document.SelectSingleNode("/root/Camera");
+            cameraIp = eleCamera.Attributes["IP"].Value;
+            recordLength = int.Parse(eleCamera.Attributes["RecordLength"].Value);
+
             thread = new Thread(new ThreadStart(MonitorSensor));
+
+            timer.Elapsed += Timer_Elapsed;
+            timer.AutoReset = true;
+            timer.Interval = recordLength * 100;
+            timer.Start();
         }
 
         public void MonitorSensor()
         {
             //adam.SetData();
 
-            if ((int)btnStart.Tag==0)
+            if ((int)btnStart.Tag == 0)
             {
                 if (ipCameraHelper == null)
                 {
@@ -65,36 +96,48 @@ namespace Question1
                 btnStart.Content = "开始监控";
                 btnStart.Tag = 0;
             }
+        }
 
-            MonitorSensor();
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string filePath = @"D:\videos\" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".mp4"
+            File.Create(filePath);
+
+            if (!videoFileWriter.IsOpen)
+            {
+                videoFileWriter.Open(filePath, 640, 840);
+            }
+            else
+            {
+                videoFileWriter.Close();
+            }
+
         }
 
         public void ShowImage(ImageEventArgs imageEventArgs)
         {
             imgCamera.Source = imageEventArgs.FrameReadyEventArgs.BitmapImage;
-        }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (!File.Exists("Config.xml"))
-                return;
+            //BitmapImage image = imageEventArgs.FrameReadyEventArgs.BitmapImage;
 
-            XmlDocument document = new XmlDocument();
-            document.Load("Config.xml");
+            //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(image.PixelWidth, image.PixelHeight, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
 
-            XmlNode eleLED = document.SelectSingleNode("/root/LED");
-            ledCom = eleLED.Attributes["Com"].Value;
-            ledText = eleLED.Attributes["Text"].Value;
+            //System.Drawing.Imaging.BitmapData data = bmp.LockBits(
+            //new System.Drawing.Rectangle(System.Drawing.Point.Empty, bmp.Size), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
 
-            XmlNode eleCamera = document.SelectSingleNode("/root/Camera");
-            cameraIp = eleCamera.Attributes["IP"].Value;
-            recordLength = eleCamera.Attributes["RecordLength"].Value;
-        }
+            //image.CopyPixels(Int32Rect.Empty, data.Scan0, data.Height * data.Stride, data.Stride); bmp.UnlockBits(data);
 
-        private void btnAutoLED_Click(object sender, RoutedEventArgs e)
-        {
-            LEDPlayer player = new LEDPlayer(ledCom);
-            player.DisplayText(ledText);
+            MemoryStream stream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageEventArgs.FrameReadyEventArgs.BitmapImage));
+            encoder.Save(stream);
+
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(stream);
+            stream.Close();
+
+
+            if (videoFileWriter.IsOpen)
+                videoFileWriter.WriteVideoFrame(bitmap);
         }
 
         private void btnSetUp_Click(object sender, RoutedEventArgs e)
@@ -106,6 +149,12 @@ namespace Question1
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             thread.Start();
+        }
+
+        private void btnAutoLED_Click(object sender, RoutedEventArgs e)
+        {
+            LEDPlayer player = new LEDPlayer(ledCom);
+            player.DisplayText(ledText);
         }
     }
 }
