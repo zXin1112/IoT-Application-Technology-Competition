@@ -28,6 +28,8 @@ namespace Question1
         ADAM4150 adam;
         IpCameraHelper ipCameraHelper;
 
+        bool adamDIO = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -49,18 +51,23 @@ namespace Question1
 
         public void MonitorSensor()
         {
+            if (ipCameraHelper == null)
+            {
+                this.Dispatcher.Invoke(new Action(() =>
+                {
+                    ipCameraHelper = new IpCameraHelper("192.168.3.200:80", "admin", "", new Action<ImageEventArgs>(ShowImage));
+                }));
+            }
+
             //adam.SetData();
 
-            if (!adam.DI0)
-            {
-                if (ipCameraHelper == null)
-                {
-                    this.Dispatcher.Invoke(new Action(() =>
-                    {
-                        ipCameraHelper = new IpCameraHelper("172.16.1.13:81", "admin", "", new Action<ImageEventArgs>(ShowImage));
-                    }));
-                }
+            if (adamDIO == adam.DI0)
+                return;
 
+            adamDIO = adam.DI0;
+
+            if (!adamDIO)
+            {
                 ipCameraHelper.StartProcessing();
             }
             else
