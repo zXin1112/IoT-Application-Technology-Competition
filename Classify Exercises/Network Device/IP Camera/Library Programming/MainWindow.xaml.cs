@@ -1,6 +1,7 @@
 ﻿using IPCameraDll;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -138,6 +139,66 @@ namespace Library_Programming
         private void btnRight_LostMouseCapture(object sender, MouseEventArgs e)
         {
             ipCamera.PanRight();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            //encoder.Frames.Add(BitmapFrame.Create((BitmapImage)imgCamera.Source));
+
+            //FileStream stream = new FileStream(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss") + ".jpg", FileMode.CreateNew);
+            //encoder.Save(stream);
+
+            //stream.Close();
+
+            ShowImage();
+        }
+
+        private void SaveImage()
+        {
+            using (SqlConnection con = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
+            {
+                using (SqlCommand com = new SqlCommand("insert into T_Camera values (@image)", con))
+                {
+                    using (Stream stream = ((BitmapImage)imgCamera.Source).StreamSource)
+                    {
+                        stream.Position = 0;
+
+                        con.Open();
+                        com.Parameters.AddWithValue("@image", stream);
+
+                        int result = com.ExecuteNonQuery();
+                        if (result == 1)
+                            MessageBox.Show("成功");
+                    }
+                }
+            }
+        }
+
+        private void ShowImage()
+        {
+            using (SqlConnection con = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
+            {
+                using (SqlCommand com = new SqlCommand("select CameraImage from T_Camera where No=5", con))
+                {
+
+
+                    con.Open();
+
+                    SqlDataReader reader = com.ExecuteReader();
+                    reader.Read();
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.StreamSource = new MemoryStream((byte[])reader.GetValue(0));
+                    image.EndInit();
+
+                    imgCamera.Source = image;
+
+
+
+
+                }
+            }
         }
     }
 }
