@@ -26,7 +26,7 @@ namespace Library_Programming
     {
         Thread trdShowCamera;
         Timer trdSaveImage;
-        Thread trdSaveVideo;
+        Timer trdSaveVideo;
 
         IpCameraHelper ipCamera;
 
@@ -39,41 +39,30 @@ namespace Library_Programming
         {
             InitializeComponent();
 
+            ipCamera = new IpCameraHelper("192.168.3.200:80", "admin", "", new Action<ImageEventArgs>((imageEventArgs) =>
+            {
+                imgCamera.Source = imageEventArgs.FrameReadyEventArgs.BitmapImage;
+            }));
+
             trdShowCamera = new Thread(new ThreadStart(MonitorLogic));
+            trdShowCamera.IsBackground = true;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ipCamera = new IpCameraHelper("192.168.3.200:80", "admin", "", new Action<ImageEventArgs>((imageEventArgs) =>
-            {
-                imgCamera.Source = imageEventArgs.FrameReadyEventArgs.BitmapImage;
-
-                if (isSaveImage)
-                {
-
-                }
-            }));
-
-            trdShowCamera.IsBackground = true;
             trdShowCamera.Start();
         }
 
         private void MonitorLogic()
         {
-            while (true)
+            while (true)        //线程循环监测
             {
-                UpdateLogic();
+                UpdateLogic();      //更新逻辑值状态
 
-                //if (ipCamera == null)
-                //    Dispatcher.Invoke(new Action(() =>
-                //    {
-
-                //    }));
-
-                if (savedLogical == logicalValue)
+                if (savedLogical == logicalValue)       //逻辑值状态未改变时跳出
                     return;
 
-                savedLogical = logicalValue;
+                savedLogical = logicalValue;        //逻辑值已改变，保存逻辑值到变量
 
                 if (savedLogical)
                 {
@@ -84,12 +73,6 @@ namespace Library_Programming
                     ipCamera.StopProcessing();
                 }
             }
-        }
-
-        private void UpdateLogic()
-        {
-            if ((DateTime.Now.Second % 5) == 0)
-                logicalValue = !logicalValue;
         }
 
         private void btnAutoImage_Click(object sender, RoutedEventArgs e)
@@ -141,20 +124,18 @@ namespace Library_Programming
             ipCamera.PanRight();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void SaveImageInFile()
         {
-            //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            //encoder.Frames.Add(BitmapFrame.Create((BitmapImage)imgCamera.Source));
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();        //.jpg格式的编码器
 
-            //FileStream stream = new FileStream(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss") + ".jpg", FileMode.CreateNew);
-            //encoder.Save(stream);
+            BitmapFrame bitmapFrame = BitmapFrame.Create((BitmapImage)imgCamera.Source);        //格式化图像数据
+            encoder.Frames.Add(bitmapFrame);
 
-            //stream.Close();
-
-            ShowImage();
+            using (FileStream stream = new FileStream(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss") + ".jpg", FileMode.CreateNew))
+                encoder.Save(stream);
         }
 
-        private void SaveImage()
+        private void SaveImageInDatabase()
         {
             using (SqlConnection con = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
             {
@@ -175,17 +156,15 @@ namespace Library_Programming
             }
         }
 
-        private void ShowImage()
+        private void ReadImageFormDatabase()
         {
-            using (SqlConnection con = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
+            using (SqlConnection connection = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
             {
-                using (SqlCommand com = new SqlCommand("select CameraImage from T_Camera where No=5", con))
+                using (SqlCommand command = new SqlCommand("select CameraImage from T_Camera where No=5", connection))
                 {
+                    connection.Open();
 
-
-                    con.Open();
-
-                    SqlDataReader reader = com.ExecuteReader();
+                    SqlDataReader reader = command.ExecuteReader();
                     reader.Read();
                     BitmapImage image = new BitmapImage();
                     image.BeginInit();
@@ -193,11 +172,22 @@ namespace Library_Programming
                     image.EndInit();
 
                     imgCamera.Source = image;
-
-
-
-
                 }
+            }
+        }
+
+        int i = 0;
+
+        private void UpdateLogic()
+        {
+            if (i > 10)
+            {
+                logicalValue = !logicalValue;
+                i = 0;
+            }
+            else
+            {
+                i++;
             }
         }
     }
