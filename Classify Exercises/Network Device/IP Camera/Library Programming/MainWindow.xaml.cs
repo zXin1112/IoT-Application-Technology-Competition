@@ -43,6 +43,16 @@ namespace Library_Programming
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ipCamera = new IpCameraHelper("192.168.3.200:80", "admin", "", new Action<ImageEventArgs>((imageEventArgs) =>
+            {
+                imgCamera.Source = imageEventArgs.FrameReadyEventArgs.BitmapImage;
+
+                if (isSaveImage)
+                {
+
+                }
+            }));
+
             trdShowCamera.IsBackground = true;
             trdShowCamera.Start();
         }
@@ -51,21 +61,13 @@ namespace Library_Programming
         {
             while (true)
             {
-                //UpdateLogic();
+                UpdateLogic();
 
-                if (ipCamera == null)
-                    Dispatcher.Invoke(new Action(() =>
-                    {
-                        ipCamera = new IpCameraHelper("192.168.3.200:80", "admin", "", new Action<ImageEventArgs>((imageEventArgs) =>
-                        {
-                            imgCamera.Source = imageEventArgs.FrameReadyEventArgs.BitmapImage;
+                //if (ipCamera == null)
+                //    Dispatcher.Invoke(new Action(() =>
+                //    {
 
-                            if (isSaveImage)
-                            {
-
-                            }
-                        }));
-                    }));
+                //    }));
 
                 if (savedLogical == logicalValue)
                     return;

@@ -1,0 +1,26 @@
+﻿<Window x:Class="Library_Programming.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Programming"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="387.535" Width="265.864">
+    <Grid>
+        <Label x:Name="lblDO2" Content="路灯 DO2" HorizontalAlignment="Left" Margin="38,290,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDO1" Content="楼道灯 DO1" HorizontalAlignment="Left" Margin="32,257,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDO0" Content="火警 DO0" HorizontalAlignment="Left" Margin="38,224,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnDO2" Content="打开" HorizontalAlignment="Left" Margin="123,293,0,0" VerticalAlignment="Top" Width="75" Click="btnDO2_Click"/>
+        <Button x:Name="btnDO1" Content="打开" HorizontalAlignment="Left" Margin="123,260,0,0" VerticalAlignment="Top" Width="75" Click="btnDO1_Click"/>
+        <Button x:Name="btnDO0" Content="打开" HorizontalAlignment="Left" Margin="123,227,0,0" VerticalAlignment="Top" Width="75" Click="btnDO0_Click"/>
+        <Button x:Name="btnReceive" Content="获取数据" HorizontalAlignment="Left" Margin="28,21,0,0" VerticalAlignment="Top" Width="76" Click="btnReceive_Click"/>
+        <Label Content="DI0" HorizontalAlignment="Left" Margin="29,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="DI1" HorizontalAlignment="Left" Margin="29,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="DI2" HorizontalAlignment="Left" Margin="29,138,0,0" VerticalAlignment="Top"/>
+        <Label Content="DI4" HorizontalAlignment="Left" Margin="29,174,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDI0" Content="NULL" HorizontalAlignment="Left" Margin="171,60,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDI1" Content="NULL" HorizontalAlignment="Left" Margin="171,100,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDI2" Content="NULL" HorizontalAlignment="Left" Margin="171,138,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDI3" Content="NULL" HorizontalAlignment="Left" Margin="171,174,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

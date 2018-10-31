@@ -1,0 +1,16 @@
+﻿<Window x:Class="Protocol_Programming.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Protocol_Programming"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="292" Width="489">
+    <Grid>
+        <TextBox x:Name="txbData" HorizontalAlignment="Left" Height="139" Margin="90,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" FontSize="14"/>
+        <Label Content="信息：" HorizontalAlignment="Left" Margin="33,32,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="btnSend" Content="发送" HorizontalAlignment="Left" Margin="33,203,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="btnSend_Click"/>
+        <Label x:Name="lblResult" Content="" HorizontalAlignment="Left" Margin="141,200,0,0" VerticalAlignment="Top" FontSize="14" Width="301"/>
+
+    </Grid>
+</Window>
