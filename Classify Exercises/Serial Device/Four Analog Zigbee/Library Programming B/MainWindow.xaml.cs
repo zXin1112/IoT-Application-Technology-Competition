@@ -27,7 +27,7 @@ namespace Library_Programming_B
         {
             InitializeComponent();
 
-            fourAnalogZigbee = new ZigBee(new ComSettingModel { ZigbeeCom = "COM4" });
+            fourAnalogZigbee = new ZigBee(new ComSettingModel { ZigbeeCom = "COM1" });
         }
 
         private void btnGetData_Click(object sender, RoutedEventArgs e)
@@ -35,8 +35,9 @@ namespace Library_Programming_B
             fourAnalogZigbee.GetSet();
 
             byte[] data = fourAnalogZigbee.OriginalData;
-
-            int value = BitConverter.ToInt32(data, 0);
+            byte[] data1 = new byte[] { data[20], data[21] };
+            int value = BitConverter.ToInt16(data1, 0);
+            
         }
     }
 }

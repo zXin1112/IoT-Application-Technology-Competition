@@ -27,7 +27,7 @@ namespace Library_Programming_A
         {
             InitializeComponent();
 
-            fourAnalogZigbee = new ZigBee(new ComSettingModel { ZigbeeCom = "COM4" });
+            fourAnalogZigbee = new ZigBee(new ComSettingModel { ZigbeeCom = "COM1" });
         }
 
         private void btnGetData_Click(object sender, RoutedEventArgs e)
