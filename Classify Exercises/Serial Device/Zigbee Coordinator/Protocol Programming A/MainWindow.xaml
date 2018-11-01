@@ -7,20 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="开始监听" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="100" FontSize="16" Click="Button_Click"/>
+        <Button x:Name="btnGetData" Content="开始监听" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="100" FontSize="16" Click="Button_Click" Tag="0"/>
         <Label Content="温度" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="湿度" HorizontalAlignment="Left" Margin="30,139,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="人体" HorizontalAlignment="Left" Margin="30,178,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="CO" HorizontalAlignment="Left" Margin="199,100,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="可燃气" HorizontalAlignment="Left" Margin="199,139,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="烟雾" HorizontalAlignment="Left" Margin="199,178,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="火焰" HorizontalAlignment="Left" Margin="199,178,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblTem" Content="null" HorizontalAlignment="Left" Margin="95,100,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblHum" Content="null" HorizontalAlignment="Left" Margin="95,139,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblBody" Content="null" HorizontalAlignment="Left" Margin="95,178,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblCO" Content="null" HorizontalAlignment="Left" Margin="264,100,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblGas" Content="null" HorizontalAlignment="Left" Margin="264,139,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="lblSmoke" Content="null" HorizontalAlignment="Left" Margin="264,178,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblFlame" Content="null" HorizontalAlignment="Left" Margin="264,178,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label Content="光照" HorizontalAlignment="Left" Margin="30,217,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblLight" Content="null" HorizontalAlignment="Left" Margin="95,217,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="继电器 0001" HorizontalAlignment="Left" Margin="30,282,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="继电器 0002" HorizontalAlignment="Left" Margin="30,321,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="继电器 0003" HorizontalAlignment="Left" Margin="30,360,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="btnRelay1" Content="打开" HorizontalAlignment="Left" Margin="175,286,0,0" VerticalAlignment="Top" Width="75" Tag="0" Click="btnRelay1_Click"/>
+        <Button x:Name="btnRelay2" Content="打开" HorizontalAlignment="Left" Margin="175,325,0,0" VerticalAlignment="Top" Width="75" Tag="0" Click="btnRelay2_Click"/>
+        <Button x:Name="btnRelay3" Content="打开" HorizontalAlignment="Left" Margin="175,364,0,0" VerticalAlignment="Top" Width="75" Tag="0" Click="btnRelay3_Click"/>
     </Grid>
 </Window>

@@ -75,7 +75,6 @@ namespace Protocol_Programming
                 btnGetData.Content = "开始监听";
                 btnGetData.Tag = "";
             }
-
         }
 
 
