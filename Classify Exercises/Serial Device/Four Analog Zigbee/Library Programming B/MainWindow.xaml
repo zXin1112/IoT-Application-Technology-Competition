@@ -15,12 +15,12 @@
         <Label Content="光照" HorizontalAlignment="Left" Margin="30,262,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
         <Label Content="温度" HorizontalAlignment="Left" Margin="30,301,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
         <Label Content="湿度" HorizontalAlignment="Left" Margin="30,340,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblIN1" Content="null" HorizontalAlignment="Left" Margin="95,80,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblIN2" Content="null" HorizontalAlignment="Left" Margin="95,119,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblIN3" Content="null" HorizontalAlignment="Left" Margin="95,158,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblIN4" Content="null" HorizontalAlignment="Left" Margin="95,197,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblLight" Content="null" HorizontalAlignment="Left" Margin="95,262,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblTem" Content="null" HorizontalAlignment="Left" Margin="95,301,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
-        <Label x:Name="lblHum" Content="null" HorizontalAlignment="Left" Margin="95,340,0,0" VerticalAlignment="Top" FontSize="14" Width="48"/>
+        <Label x:Name="lblIN1" Content="null" HorizontalAlignment="Left" Margin="95,80,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
+        <Label x:Name="lblIN2" Content="null" HorizontalAlignment="Left" Margin="95,119,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
+        <Label x:Name="lblIN3" Content="null" HorizontalAlignment="Left" Margin="95,158,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
+        <Label x:Name="lblIN4" Content="null" HorizontalAlignment="Left" Margin="95,197,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
+        <Label x:Name="lblLight" Content="null" HorizontalAlignment="Left" Margin="95,262,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
+        <Label x:Name="lblTem" Content="null" HorizontalAlignment="Left" Margin="95,301,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
+        <Label x:Name="lblHum" Content="null" HorizontalAlignment="Left" Margin="95,340,0,0" VerticalAlignment="Top" FontSize="14" Width="100"/>
     </Grid>
 </Window>
