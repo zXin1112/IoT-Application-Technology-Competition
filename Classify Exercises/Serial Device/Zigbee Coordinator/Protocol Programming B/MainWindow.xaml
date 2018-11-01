@@ -1,0 +1,26 @@
+﻿<Window x:Class="Protocol_Programming_B.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Protocol_Programming_B"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="开始监听" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="100" FontSize="16" Click="Button_Click"/>
+        <Label Content="温度" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="湿度" HorizontalAlignment="Left" Margin="30,139,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="人体" HorizontalAlignment="Left" Margin="30,178,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="CO" HorizontalAlignment="Left" Margin="199,100,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="可燃气" HorizontalAlignment="Left" Margin="199,139,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="烟雾" HorizontalAlignment="Left" Margin="199,178,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblTem" Content="null" HorizontalAlignment="Left" Margin="95,100,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblHum" Content="null" HorizontalAlignment="Left" Margin="95,139,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblBody" Content="null" HorizontalAlignment="Left" Margin="95,178,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblCO" Content="null" HorizontalAlignment="Left" Margin="264,100,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblGas" Content="null" HorizontalAlignment="Left" Margin="264,139,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblSmoke" Content="null" HorizontalAlignment="Left" Margin="264,178,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="光照" HorizontalAlignment="Left" Margin="30,217,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblLight" Content="null" HorizontalAlignment="Left" Margin="95,217,0,0" VerticalAlignment="Top" FontSize="14"/>
+    </Grid>
+</Window>

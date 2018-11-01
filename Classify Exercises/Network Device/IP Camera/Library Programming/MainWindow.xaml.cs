@@ -72,6 +72,8 @@ namespace Library_Programming
                 {
                     ipCamera.StopProcessing();
                 }
+
+                Thread.Sleep(1000);
             }
         }
 
@@ -126,29 +128,44 @@ namespace Library_Programming
 
         private void SaveImageInFile()
         {
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();        //.jpg格式的编码器
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();        //实例化.jpg格式的编码器
 
             BitmapFrame bitmapFrame = BitmapFrame.Create((BitmapImage)imgCamera.Source);        //格式化图像数据
             encoder.Frames.Add(bitmapFrame);
 
-            using (FileStream stream = new FileStream(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss") + ".jpg", FileMode.CreateNew))
+            using (FileStream stream = new FileStream(DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss") + ".jpg", FileMode.CreateNew))       //创建要保存的文件并打开流
                 encoder.Save(stream);
+        }
+
+        private void ReadImageFormFile(string filePath)
+        {
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
+            {
+                BitmapImage image = new BitmapImage();
+
+                image.BeginInit();
+                image.StreamSource = stream;
+                image.EndInit();
+
+                imgCamera.Source = image;
+            }
         }
 
         private void SaveImageInDatabase()
         {
-            using (SqlConnection con = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
+            using (SqlConnection connection = new SqlConnection("Data Source=192.168.1.2;Initial Catalog=TestCamera;Persist Security Info=True;User ID=sa;Password=123456"))
             {
-                using (SqlCommand com = new SqlCommand("insert into T_Camera values (@image)", con))
+                using (SqlCommand command = new SqlCommand("insert into T_Camera values (@image)", connection))
                 {
                     using (Stream stream = ((BitmapImage)imgCamera.Source).StreamSource)
                     {
                         stream.Position = 0;
 
-                        con.Open();
-                        com.Parameters.AddWithValue("@image", stream);
+                        connection.Open();
+                        command.Parameters.AddWithValue("@image", stream);
 
-                        int result = com.ExecuteNonQuery();
+                        int result = command.ExecuteNonQuery();
+
                         if (result == 1)
                             MessageBox.Show("成功");
                     }
@@ -166,7 +183,9 @@ namespace Library_Programming
 
                     SqlDataReader reader = command.ExecuteReader();
                     reader.Read();
+
                     BitmapImage image = new BitmapImage();
+
                     image.BeginInit();
                     image.StreamSource = new MemoryStream((byte[])reader.GetValue(0));
                     image.EndInit();
