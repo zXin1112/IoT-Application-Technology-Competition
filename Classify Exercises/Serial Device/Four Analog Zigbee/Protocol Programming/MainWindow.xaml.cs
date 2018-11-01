@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,6 +56,8 @@ namespace Protocol_Programming
                     lblTem.Content = ((in2 * 3300 / 1023 / 150 - 4) / 16 * 70 - 10).ToString("f2");
                     lblHum.Content = ((in3 * 3300 / 1023 / 150 - 4) / 16 * 50 + 50).ToString("f2");
                 });
+
+                Thread.Sleep(1000);
             }
         }
 
