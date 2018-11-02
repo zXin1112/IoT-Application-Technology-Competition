@@ -53,7 +53,6 @@ namespace Protocol_Programming_A
                     //if (data[data.Length - 1] == CheckDataZigbeeSensor(data.Take(data.Length - 1).ToArray()))
                     //    return;
 
-
                     switch (data[16])
                     {
                         case 0x01: LabelValue(lblTem, (double)BitConverter.ToInt16(data, 17) / 10 + " 度"); LabelValue(lblHum, (double)BitConverter.ToInt16(data, 19) / 10 + " %"); break;
@@ -64,9 +63,18 @@ namespace Protocol_Programming_A
                         case 0x24: LabelValue(lblFlame, (double)BitConverter.ToUInt16(data, 17) / 100 + " V"); break;
                     }
 
-
-
-
+                    //Dispatcher.Invoke(new Action(() =>
+                    //{
+                    //    switch (data[16])
+                    //    {
+                    //        case 0x01: lblTem.Content = (double)BitConverter.ToInt16(data, 17) / 10 + " 度"; lblHum.Content = (double)BitConverter.ToInt16(data, 19) / 10 + " %"; break;
+                    //        case 0x11: lblBody.Content = BitConverter.ToBoolean(data, 17) ? "有人" : "无人"; break;
+                    //        case 0x21: lblLight.Content = (double)BitConverter.ToUInt16(data, 17) / 100 + " V"; break;
+                    //        case 0x22: lblCO.Content = (double)BitConverter.ToUInt16(data, 17) / 100 + " V"; break;
+                    //        case 0x23: lblGas.Content = (double)BitConverter.ToUInt16(data, 17) / 100 + " V"; break;
+                    //        case 0x24: lblFlame.Content = (double)BitConverter.ToUInt16(data, 17) / 100 + " V"; break;
+                    //    }
+                    //}));
                 }
             }
         }
@@ -136,17 +144,72 @@ namespace Protocol_Programming_A
                 serialPort.Write(cmd, 0, cmd.Length);
                 serialPort.DiscardOutBuffer();
             }
-
         }
 
         private void btnRelay2_Click(object sender, RoutedEventArgs e)
         {
+            byte[] cmd = null;
 
+            if ((string)btnRelay2.Tag == "0")
+            {
+                cmd = new byte[] { 0xFF, 0xF5, 0x05, 0x02, 0x02, 0x00, 0x00, 0x01, 0x00 };
+                btnRelay2.Content = "关闭";
+                btnRelay2.Tag = "1";
+            }
+            else
+            {
+                cmd = new byte[] { 0xFF, 0xF5, 0x05, 0x02, 0x02, 0x00, 0x00, 0x02, 0x00 };
+                btnRelay2.Content = "打开";
+                btnRelay2.Tag = "0";
+            }
+
+            if (!serialPort.IsOpen)
+            {
+                serialPort.Open();
+
+                serialPort.Write(cmd, 0, cmd.Length);
+                serialPort.DiscardOutBuffer();
+
+                serialPort.Close();
+            }
+            else
+            {
+                serialPort.Write(cmd, 0, cmd.Length);
+                serialPort.DiscardOutBuffer();
+            }
         }
 
         private void btnRelay3_Click(object sender, RoutedEventArgs e)
         {
+            byte[] cmd = null;
 
+            if ((string)btnRelay3.Tag == "0")
+            {
+                cmd = new byte[] { 0xFF, 0xF5, 0x05, 0x02, 0x03, 0x00, 0x00, 0x01, 0x00 };
+                btnRelay3.Content = "关闭";
+                btnRelay3.Tag = "1";
+            }
+            else
+            {
+                cmd = new byte[] { 0xFF, 0xF5, 0x05, 0x02, 0x03, 0x00, 0x00, 0x02, 0x00 };
+                btnRelay3.Content = "打开";
+                btnRelay3.Tag = "0";
+            }
+
+            if (!serialPort.IsOpen)
+            {
+                serialPort.Open();
+
+                serialPort.Write(cmd, 0, cmd.Length);
+                serialPort.DiscardOutBuffer();
+
+                serialPort.Close();
+            }
+            else
+            {
+                serialPort.Write(cmd, 0, cmd.Length);
+                serialPort.DiscardOutBuffer();
+            }
         }
     }
 }
