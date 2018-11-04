@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Srr1100U;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,42 @@ namespace Library_Programming
     /// </summary>
     public partial class MainWindow : Window
     {
+        SrrReader srrReader = null;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            srrReader = new SrrReader("COM4");
+        }
+
+        private void btnDevice_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnDevice.Tag.ToString() == "0")
+            {
+                srrReader.ConnDevice();
+
+                btnRead.IsEnabled = true;
+                btnDevice.Content = "断开设备";
+                btnDevice.Tag = "1";
+            }
+            else
+            {
+                srrReader.CloseDevice();
+
+                btnRead.IsEnabled = false;
+                btnDevice.Content = "连接设备";
+                btnDevice.Tag = "0";
+            }
+        }
+
+        private void btnRead_Click(object sender, RoutedEventArgs e)
+        {
+            srrReader.Read(new Action<string>((epc) =>
+            {
+                if (!lsbEPC.Items.Contains(epc))
+                    lsbEPC.Items.Add(epc);
+            }));
         }
     }
 }

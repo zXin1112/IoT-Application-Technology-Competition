@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="btnDevice" Content="连接设备" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="100" Tag="0" FontSize="14" Click="btnDevice_Click"/>
+        <Button x:Name="btnRead" Content="读取" HorizontalAlignment="Left" Margin="160,30,0,0" VerticalAlignment="Top" Width="75" Tag="0" FontSize="14" Click="btnRead_Click" IsEnabled="False"/>
+        <ListBox x:Name="lsbEPC" HorizontalAlignment="Left" Height="300" Margin="30,75,0,0" VerticalAlignment="Top" Width="400"/>
+
     </Grid>
 </Window>
