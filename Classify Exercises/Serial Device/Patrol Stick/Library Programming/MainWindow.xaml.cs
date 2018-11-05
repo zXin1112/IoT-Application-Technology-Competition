@@ -32,7 +32,14 @@ namespace Library_Programming
 
         private void btnGetAllData_Click(object sender, RoutedEventArgs e)
         {
+            int count = solid.ReadDivceRecordWeb();
 
+            Array array = Array.CreateInstance(typeof(string),count);
+
+            if (solid.ReadDivceRecord(ref array) != count)
+                return;
+
+            
         }
     }
 }
