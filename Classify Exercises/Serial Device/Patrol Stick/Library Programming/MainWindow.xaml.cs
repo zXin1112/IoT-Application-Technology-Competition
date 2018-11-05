@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eluxun;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,18 @@ namespace Library_Programming
     /// </summary>
     public partial class MainWindow : Window
     {
+        SOLID solid = null;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            solid = new SOLID() { CommPort = 4 };
+        }
+
+        private void btnGetAllData_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
