@@ -55,7 +55,7 @@ namespace Library_Programming
             srrReader.Read(new Action<string>((epc) =>
             {
                 if (!lsbEPC.Items.Contains(epc))
-                    lsbEPC.Items.Add(epc);
+                    Dispatcher.Invoke(() => { lsbEPC.Items.Add(epc); });
             }));
         }
     }

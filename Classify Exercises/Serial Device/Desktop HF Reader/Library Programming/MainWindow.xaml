@@ -7,17 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnDevice" Content="连接设备" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="30,30,0,0" FontSize="14" Click="btnDevice_Click"/>
+        <Button x:Name="btnDevice" Content="连接设备" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="30,30,0,0" FontSize="14" Click="btnDevice_Click" Tag="0"/>
         <Button x:Name="btnSearch" Content="寻卡" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="30,75,0,0" FontSize="14" Click="btnSearch_Click"/>
         <Button x:Name="btnAuth" Content="验证密码" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="30,120,0,0" FontSize="14" Click="btnAuth_Click"/>
         <Button x:Name="btnRead" Content="读取" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="30,165,0,0" FontSize="14" Click="btnRead_Click"/>
-        <Slider x:Name="sdrCardKind" HorizontalAlignment="Left" Margin="230,25,0,0" VerticalAlignment="Top" Maximum="15" Width="150" SmallChange="1" TickPlacement="Both" IsSnapToTickEnabled="True" Ticks="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"/>
+        <Slider x:Name="sdrCardKind" HorizontalAlignment="Left" Margin="230,25,0,0" VerticalAlignment="Top" Maximum="15" Width="150" SmallChange="1" TickPlacement="Both" IsSnapToTickEnabled="True" Ticks="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" Value="1"/>
         <Label x:Name="lblCardKind" Content="卡扇区 " HorizontalAlignment="Left" Margin="158,27,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblKindNum" Content="区序号 " HorizontalAlignment="Left" Margin="158,72,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Slider x:Name="sdrKindNum" HorizontalAlignment="Left" Margin="230,70,0,0" VerticalAlignment="Top" Maximum="3" Width="150" SmallChange="1" TickPlacement="Both" IsSnapToTickEnabled="True" Ticks="0 1 2 3"/>
         <Button x:Name="btnWrite" Content="写入" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="30,211,0,0" FontSize="14" Click="btnWrite_Click"/>
         <TextBox x:Name="txbRead" HorizontalAlignment="Left" Height="23" Margin="158,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" FontSize="14"/>
         <TextBox x:Name="txbWrite" HorizontalAlignment="Left" Height="23" Margin="158,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" FontSize="14"/>
+        <Label x:Name="lblMessage" HorizontalAlignment="Left" Margin="30,379,0,0" VerticalAlignment="Top" Width="368"/>
 
     </Grid>
 </Window>

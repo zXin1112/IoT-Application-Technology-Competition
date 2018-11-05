@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,38 +33,89 @@ namespace Library_Programming
         {
             if (btnDevice.Tag.ToString() == "0")
             {
-                mifareRFEYE.ConnDevice();
+                ResultMessage message = mifareRFEYE.ConnDevice();
 
-                btnDevice.Content = "断开设备";
-                btnDevice.Tag = "1";
+                if (message.Result == Result.Success)
+                {
+                    btnDevice.Content = "断开设备";
+                    btnDevice.Tag = "1";
+                }
+                else
+                    lblMessage.Content = message.OutInfo;
+
             }
             else
             {
-                mifareRFEYE.CloseDevice();
+                ResultMessage message = mifareRFEYE.CloseDevice();
 
-                btnDevice.Content = "连接设备";
-                btnDevice.Tag = "0";
+                if (message.Result == Result.Success)
+                {
+                    btnDevice.Content = "连接设备";
+                    btnDevice.Tag = "0";
+                }
+                else
+                    lblMessage.Content = message.OutInfo;
             }
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            mifareRFEYE.Search();
+            ResultMessage message = mifareRFEYE.Search();
+
+            if (message.Result == Result.Success)
+            {
+                lblMessage.Content = "寻卡成功 " + message.Model;
+            }
+            else
+                lblMessage.Content = message.OutInfo;
         }
 
         private void btnAuth_Click(object sender, RoutedEventArgs e)
         {
-            mifareRFEYE.AuthCardPwd(null, (CardDataKind)sdrCardKind.Value);
+            ResultMessage message = mifareRFEYE.AuthCardPwd(null, (CardDataKind)sdrCardKind.Value);
+
+            lblMessage.Content = message.OutInfo;
         }
 
         private void btnRead_Click(object sender, RoutedEventArgs e)
         {
-            txbRead.Text = mifareRFEYE.ReadString();
+            ResultMessage message = mifareRFEYE.Read((CardDataKind)sdrCardKind.Value, (int)sdrKindNum.Value);
+
+            if (message.Result == Result.Success)
+            {
+                txbRead.Text = Encoding.GetEncoding("GB2312").GetString((byte[])message.Model).Split('\0')[0].Trim();
+            }
+            else
+                lblMessage.Content = message.OutInfo;
         }
 
         private void btnWrite_Click(object sender, RoutedEventArgs e)
         {
-            mifareRFEYE.WriteString((CardDataKind)sdrCardKind.Value, txbWrite.Text, (int)sdrKindNum.Value, Encoding.GetEncoding("GB2312"));
+            string text = txbWrite.Text.Trim();
+
+            int count = 0;
+
+            Regex regex = new Regex(@"^[\u4e00-\u9fa5]{0,}$");
+
+            foreach (char a in text)
+            {
+                if (regex.IsMatch(a.ToString()))
+                    count += 2;
+                else
+                    count += 1;
+            }
+
+            while (count < 16)
+            {
+                text += " ";
+                count++;
+            }
+
+            byte[] data = Encoding.GetEncoding("GB2312").GetBytes(text);
+
+            ResultMessage message = mifareRFEYE.Write((CardDataKind)sdrCardKind.Value, data, (int)sdrKindNum.Value);
+
+            lblMessage.Content = message.OutInfo;
         }
     }
 }
