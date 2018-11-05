@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="btnGetAllData" Content="读取所有数据" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="btnGetAllData_Click"/>
+        <ListBox x:Name="lsbData" HorizontalAlignment="Left" Height="300" Margin="30,80,0,0" VerticalAlignment="Top" Width="400"/>
+        <Button x:Name="btnDeleteAllData" Content="删除所有数据" HorizontalAlignment="Left" Margin="310,30,0,0" VerticalAlignment="Top" Width="120" FontSize="14" Click="btnDeleteAllData_Click"/>
+        <Button x:Name="btnBindingCard" Content="绑定人员卡" HorizontalAlignment="Left" Margin="476,30,0,0" VerticalAlignment="Top" Width="100" FontSize="14" Click="btnBindingCard_Click"/>
+        <Button x:Name="btnBindingPoint" Content="绑定巡更点" HorizontalAlignment="Left" Margin="476,82,0,0" VerticalAlignment="Top" Width="100" FontSize="14" Click="btnBindingPoint_Click"/>
+        <Button x:Name="btnAnalyze" Content="解析记录" HorizontalAlignment="Left" Margin="476,134,0,0" VerticalAlignment="Top" Width="100" FontSize="14" Click="btnAnalyze_Click"/>
+
     </Grid>
 </Window>
