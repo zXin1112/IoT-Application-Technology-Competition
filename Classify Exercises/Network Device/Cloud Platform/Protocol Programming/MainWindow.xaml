@@ -21,10 +21,11 @@
         <Label Content="风扇 02" HorizontalAlignment="Left" Margin="225,169,0,0" VerticalAlignment="Top"/>
         <Label Content="灯泡 01" HorizontalAlignment="Left" Margin="225,208,0,0" VerticalAlignment="Top"/>
         <Label Content="灯泡 02" HorizontalAlignment="Left" Margin="225,247,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnFan01" Content="开" HorizontalAlignment="Left" Margin="301,134,0,0" VerticalAlignment="Top" Width="30" Click="btnFan01_Click" Tag="0"/>
-        <Button x:Name="btnFan02" Content="开" HorizontalAlignment="Left" Margin="301,173,0,0" VerticalAlignment="Top" Width="30" Click="btnFan02_Click" Tag="0"/>
-        <Button x:Name="btnLamp01" Content="开" HorizontalAlignment="Left" Margin="301,212,0,0" VerticalAlignment="Top" Width="30" Click="btnLamp01_Click" Tag="0"/>
-        <Button x:Name="btnLamp02" Content="开" HorizontalAlignment="Left" Margin="301,251,0,0" VerticalAlignment="Top" Width="30" Click="btnLamp02_Click" Tag="0"/>
+        <Button x:Name="btnFan01" Content="开" HorizontalAlignment="Left" Margin="301,134,0,0" VerticalAlignment="Top" Width="30"  Tag="0" Click="btnFan01_Click"/>
+        <Button x:Name="btnFan02" Content="开" HorizontalAlignment="Left" Margin="301,173,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
+        <Button x:Name="btnLamp01" Content="开" HorizontalAlignment="Left" Margin="301,212,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
+        <Button x:Name="btnLamp02" Content="开" HorizontalAlignment="Left" Margin="301,251,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
+        <TextBox x:Name="txbJson" HorizontalAlignment="Left" Height="250" Margin="400,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300"/>
 
     </Grid>
 </Window>
