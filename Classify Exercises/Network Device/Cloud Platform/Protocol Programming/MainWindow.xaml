@@ -1,0 +1,30 @@
+﻿<Window x:Class="Protocol_Programming.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Protocol_Programming"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="btnLogin" Content="登陆" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="btnLogin_Click"/>
+        <Button x:Name="btnSensorData" Content="获取传感数据" HorizontalAlignment="Left" Margin="30,80,0,0" VerticalAlignment="Top" Width="100" FontSize="14" Click="btnSensorData_Click"/>
+        <Label Content="IN1 风速" HorizontalAlignment="Left" Margin="30,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="IN2 大气压力" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
+        <Label Content="IN3 二氧化碳" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top"/>
+        <Label Content="IN4 空气质量" HorizontalAlignment="Left" Margin="30,247,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblIN1" Content="null" HorizontalAlignment="Left" Margin="134,130,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblIN2" Content="null" HorizontalAlignment="Left" Margin="134,169,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblIN3" Content="null" HorizontalAlignment="Left" Margin="134,208,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblIN4" Content="null" HorizontalAlignment="Left" Margin="134,247,0,0" VerticalAlignment="Top"/>
+        <Label Content="风扇 01" HorizontalAlignment="Left" Margin="225,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="风扇 02" HorizontalAlignment="Left" Margin="225,169,0,0" VerticalAlignment="Top"/>
+        <Label Content="灯泡 01" HorizontalAlignment="Left" Margin="225,208,0,0" VerticalAlignment="Top"/>
+        <Label Content="灯泡 02" HorizontalAlignment="Left" Margin="225,247,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnFan01" Content="开" HorizontalAlignment="Left" Margin="301,134,0,0" VerticalAlignment="Top" Width="30" Click="btnFan01_Click" Tag="0"/>
+        <Button x:Name="btnFan02" Content="开" HorizontalAlignment="Left" Margin="301,173,0,0" VerticalAlignment="Top" Width="30" Click="btnFan02_Click" Tag="0"/>
+        <Button x:Name="btnLamp01" Content="开" HorizontalAlignment="Left" Margin="301,212,0,0" VerticalAlignment="Top" Width="30" Click="btnLamp01_Click" Tag="0"/>
+        <Button x:Name="btnLamp02" Content="开" HorizontalAlignment="Left" Margin="301,251,0,0" VerticalAlignment="Top" Width="30" Click="btnLamp02_Click" Tag="0"/>
+
+    </Grid>
+</Window>
