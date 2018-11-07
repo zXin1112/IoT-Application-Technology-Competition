@@ -9,23 +9,27 @@
     <Grid>
         <Button x:Name="btnLogin" Content="登陆" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="btnLogin_Click"/>
         <Button x:Name="btnSensorData" Content="获取传感数据" HorizontalAlignment="Left" Margin="30,80,0,0" VerticalAlignment="Top" Width="100" FontSize="14" Click="btnSensorData_Click"/>
-        <Label Content="IN1 风速" HorizontalAlignment="Left" Margin="30,130,0,0" VerticalAlignment="Top"/>
-        <Label Content="IN2 大气压力" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
-        <Label Content="IN3 二氧化碳" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top"/>
-        <Label Content="IN4 空气质量" HorizontalAlignment="Left" Margin="30,247,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblIN1" Content="null" HorizontalAlignment="Left" Margin="134,130,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblIN2" Content="null" HorizontalAlignment="Left" Margin="134,169,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblIN3" Content="null" HorizontalAlignment="Left" Margin="134,208,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblIN4" Content="null" HorizontalAlignment="Left" Margin="134,247,0,0" VerticalAlignment="Top"/>
+        <Label Content="01 IN2 光照" HorizontalAlignment="Left" Margin="30,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="01 IN3 大气压力" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
+        <Label Content="01 IN3 空气质量" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top"/>
+        <Label Content="02 IN1 温度" HorizontalAlignment="Left" Margin="30,247,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl01IN2" Content="null" HorizontalAlignment="Left" Margin="134,130,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl01IN3" Content="null" HorizontalAlignment="Left" Margin="134,169,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl01IN4" Content="null" HorizontalAlignment="Left" Margin="134,208,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl02IN1" Content="null" HorizontalAlignment="Left" Margin="134,247,0,0" VerticalAlignment="Top"/>
         <Label Content="风扇 01" HorizontalAlignment="Left" Margin="225,130,0,0" VerticalAlignment="Top"/>
         <Label Content="风扇 02" HorizontalAlignment="Left" Margin="225,169,0,0" VerticalAlignment="Top"/>
         <Label Content="灯泡 01" HorizontalAlignment="Left" Margin="225,208,0,0" VerticalAlignment="Top"/>
         <Label Content="灯泡 02" HorizontalAlignment="Left" Margin="225,247,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnFan01" Content="开" HorizontalAlignment="Left" Margin="301,134,0,0" VerticalAlignment="Top" Width="30"  Tag="0" Click="btnFan01_Click"/>
+        <Button x:Name="btnFan01" Content="开" HorizontalAlignment="Left" Margin="301,134,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
         <Button x:Name="btnFan02" Content="开" HorizontalAlignment="Left" Margin="301,173,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
-        <Button x:Name="btnLamp01" Content="开" HorizontalAlignment="Left" Margin="301,212,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
-        <Button x:Name="btnLamp02" Content="开" HorizontalAlignment="Left" Margin="301,251,0,0" VerticalAlignment="Top" Width="30"  Tag="0"/>
+        <Button x:Name="btnLamp01" Content="开" HorizontalAlignment="Left" Margin="301,212,0,0" VerticalAlignment="Top" Width="30"  Tag="0" Click="btnLamp01_Click"/>
+        <Button x:Name="btnLamp02" Content="开" HorizontalAlignment="Left" Margin="301,251,0,0" VerticalAlignment="Top" Width="30"  Tag="0" Click="btnLamp02_Click"/>
         <TextBox x:Name="txbJson" HorizontalAlignment="Left" Height="250" Margin="400,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300"/>
+        <Label Content="02 IN2 湿度" HorizontalAlignment="Left" Margin="30,287,0,0" VerticalAlignment="Top"/>
+        <Label Content="02 IN3 风速" HorizontalAlignment="Left" Margin="30,327,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl02IN2" Content="null" HorizontalAlignment="Left" Margin="134,287,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl02IN3" Content="null" HorizontalAlignment="Left" Margin="134,327,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
