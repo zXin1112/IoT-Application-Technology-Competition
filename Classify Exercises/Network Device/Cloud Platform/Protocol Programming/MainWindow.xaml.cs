@@ -49,9 +49,8 @@ namespace Protocol_Programming
             txbJson.Text = jsonData;
             byte[] data = Encoding.UTF8.GetBytes(jsonData);
 
-            Stream stream = request.GetRequestStream();
-            stream.Write(data, 0, data.Length);
-            stream.Close();
+            using (Stream stream = request.GetRequestStream())
+                stream.Write(data, 0, data.Length);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
@@ -78,9 +77,8 @@ namespace Protocol_Programming
             //txbTest.Text = jsonData;
             byte[] data = Encoding.UTF8.GetBytes(jsonData);
 
-            Stream stream = request.GetRequestStream();
-            stream.Write(data, 0, data.Length);
-            stream.Close();
+            using (Stream stream = request.GetRequestStream())
+                stream.Write(data, 0, data.Length);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
